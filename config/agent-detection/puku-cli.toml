@@ -1,0 +1,9 @@
+# Agent detection override for puku-cli.
+# Seeded into herdr's agent-detection config dir by scripts/common.sh.
+# Field names follow herdr's agent detection manifest schema; verify with:
+#   herdr api schema --json
+
+[[agent]]
+name = "puku-cli"
+match_cmdline = ["puku-cli"]
+alt_cmdline = ["puku"]

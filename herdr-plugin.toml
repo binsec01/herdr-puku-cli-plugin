@@ -1,0 +1,45 @@
+id = "puku-cli.integration"
+name = "puku-cli"
+version = "0.1.0"
+min_herdr_version = "0.7.0"
+description = "Launch and manage puku-cli agents inside Herdr, with session restore and lifecycle state."
+platforms = ["linux", "macos", "windows"]
+
+# Interactive puku-cli sessions run as plugin PANE entrypoints. Herdr opens a
+# real terminal PTY for each, so puku-cli gets a TTY (actions/CLI have none and
+# cannot launch interactive agents). Bind these in your herdr config, e.g.:
+#   [[keys.command]]
+#   key = "prefix+p"
+#   type = "plugin_pane"
+#   command = "puku-cli.integration.task"
+#   description = "puku-cli: new task"
+
+[[panes]]
+id = "task"
+title = "puku-cli"
+placement = "split"
+command = ["sh", "scripts/launch.sh", "task"]
+
+[[panes]]
+id = "resume-last"
+title = "puku-cli (last session)"
+placement = "split"
+command = ["sh", "scripts/launch.sh", "resume-last"]
+
+[[panes]]
+id = "resume-named"
+title = "puku-cli (named session)"
+placement = "split"
+command = ["sh", "scripts/launch.sh", "resume-named"]
+
+[[actions]]
+id = "setup"
+title = "puku-cli: install herdr integration"
+contexts = ["workspace"]
+command = ["sh", "scripts/setup.sh"]
+
+[[actions]]
+id = "notify"
+title = "puku-cli: send notification"
+contexts = ["workspace", "pane"]
+command = ["sh", "scripts/notify.sh"]

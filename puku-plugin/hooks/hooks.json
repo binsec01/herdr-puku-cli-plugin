@@ -1,0 +1,44 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "sh /home/rahat/development/herdr-puku-cli-plugin/puku-hooks/herdr-status.sh"
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "sh /home/rahat/development/herdr-puku-cli-plugin/puku-hooks/herdr-status.sh"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "sh /home/rahat/development/herdr-puku-cli-plugin/puku-hooks/herdr-status.sh"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "sh /home/rahat/development/herdr-puku-cli-plugin/puku-hooks/herdr-status.sh"
+          }
+        ]
+      }
+    ]
+  }
+}
