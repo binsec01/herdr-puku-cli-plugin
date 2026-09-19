@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-marketplace.json",
+  "name": "herdr-puku-cli-local",
+  "version": "0.1.0",
+  "description": "Local marketplace for the herdr-puku-cli integration plugin.",
+  "owner": {
+    "name": "rahat"
+  },
+  "plugins": [
+    {
+      "name": "herdr-integration",
+      "description": "Reports puku-cli lifecycle state (idle/working/blocked) to Herdr from inside the live puku-cli process via hooks.",
+      "version": "0.1.0",
+      "author": {
+        "name": "rahat"
+      },
+      "source": "./puku-plugin"
+    }
+  ]
+}
