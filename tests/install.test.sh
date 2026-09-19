@@ -99,4 +99,21 @@ node -e '
 ' > /tmp/hj4.txt
 t_assert_eq "ok" "$(cat /tmp/hj4.txt)" "single entry per event"
 
+# 8. Marketplace manifest conforms to puku-cli's schema: `$schema`, `version`
+#    and `description` are NOT valid at the root (they belong under `metadata`).
+#    puku-cli rejects them with "Unrecognized keys", which breaks
+#    `puku-cli plugin marketplace add`.
+t_title "marketplace.json uses puku-cli's root keys"
+export MJ="$ROOT/.puku-plugin/marketplace.json"
+node -e '
+  const fs=require("fs");
+  const j=JSON.parse(fs.readFileSync(process.env.MJ,"utf8"));
+  const forbidden=["$schema","version","description"].filter(k=>k in j);
+  const missing=["name","owner","plugins"].filter(k=>!(k in j));
+  if (forbidden.length) process.stdout.write("forbidden:"+forbidden.join(","));
+  else if (missing.length) process.stdout.write("missing:"+missing.join(","));
+  else process.stdout.write("ok");
+' > /tmp/mj.txt
+t_assert_eq "ok" "$(cat /tmp/mj.txt)" "marketplace.json root keys are schema-valid"
+
 summary

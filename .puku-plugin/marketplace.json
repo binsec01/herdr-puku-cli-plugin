@@ -1,10 +1,11 @@
 {
-  "$schema": "https://json.schemastore.org/claude-code-marketplace.json",
   "name": "herdr-puku-cli-local",
-  "version": "0.1.0",
-  "description": "Local marketplace for the herdr-puku-cli integration plugin.",
   "owner": {
     "name": "rahat"
+  },
+  "metadata": {
+    "version": "0.1.0",
+    "description": "Local marketplace for the herdr-puku-cli integration plugin."
   },
   "plugins": [
     {
