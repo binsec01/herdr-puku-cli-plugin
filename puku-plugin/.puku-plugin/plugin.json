@@ -4,6 +4,5 @@
   "description": "Reports puku-cli lifecycle state (idle/working/blocked) to Herdr from inside the live puku-cli process via hooks.",
   "author": {
     "name": "rahat"
-  },
-  "hooks": "./hooks/hooks.json"
+  }
 }
