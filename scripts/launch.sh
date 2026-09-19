@@ -7,8 +7,9 @@
 # these are panes, not actions.)
 #
 # Lifecycle state is reported by the puku-cli hook
-# (puku-hooks/herdr-status.sh), which runs INSIDE the live puku-cli process
-# on SessionStart (idle) and Stop (idle). That hook is installed via
+# (puku-plugin/hooks/herdr-status.sh), which runs INSIDE the live puku-cli process
+# on SessionStart (idle), prompt/tool events (working/blocked), and
+# Stop/SessionEnd (idle). That hook is installed via
 # `puku-cli plugin install puku-plugin/`. This launcher just seeds agent
 # detection and runs puku-cli.
 #

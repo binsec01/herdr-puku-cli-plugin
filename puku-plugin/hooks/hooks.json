@@ -5,7 +5,17 @@
         "hooks": [
           {
             "type": "command",
-            "command": "sh /home/rahat/development/herdr-puku-cli-plugin/puku-hooks/herdr-status.sh"
+            "command": "sh ${PUKU_CLI_PLUGIN_ROOT}/hooks/herdr-status.sh"
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "sh ${PUKU_CLI_PLUGIN_ROOT}/hooks/herdr-status.sh"
           }
         ]
       }
@@ -15,7 +25,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "sh /home/rahat/development/herdr-puku-cli-plugin/puku-hooks/herdr-status.sh"
+            "command": "sh ${PUKU_CLI_PLUGIN_ROOT}/hooks/herdr-status.sh"
           }
         ]
       }
@@ -25,7 +35,27 @@
         "hooks": [
           {
             "type": "command",
-            "command": "sh /home/rahat/development/herdr-puku-cli-plugin/puku-hooks/herdr-status.sh"
+            "command": "sh ${PUKU_CLI_PLUGIN_ROOT}/hooks/herdr-status.sh"
+          }
+        ]
+      }
+    ],
+    "PostToolUseFailure": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "sh ${PUKU_CLI_PLUGIN_ROOT}/hooks/herdr-status.sh"
+          }
+        ]
+      }
+    ],
+    "PermissionDenied": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "sh ${PUKU_CLI_PLUGIN_ROOT}/hooks/herdr-status.sh"
           }
         ]
       }
@@ -35,7 +65,27 @@
         "hooks": [
           {
             "type": "command",
-            "command": "sh /home/rahat/development/herdr-puku-cli-plugin/puku-hooks/herdr-status.sh"
+            "command": "sh ${PUKU_CLI_PLUGIN_ROOT}/hooks/herdr-status.sh"
+          }
+        ]
+      }
+    ],
+    "StopFailure": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "sh ${PUKU_CLI_PLUGIN_ROOT}/hooks/herdr-status.sh"
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "sh ${PUKU_CLI_PLUGIN_ROOT}/hooks/herdr-status.sh"
           }
         ]
       }
