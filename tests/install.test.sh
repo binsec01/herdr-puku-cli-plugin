@@ -12,16 +12,22 @@ HOOK_SCRIPT="$ROOT/puku-hooks/herdr-status.sh"
 
 echo "puku-plugin payload"
 
-# 1. plugin.json is valid JSON with required keys
-t_title "plugin.json is valid JSON with required keys"
+# 1. plugin.json is valid JSON with required keys.
+# puku-cli auto-loads ./hooks/hooks.json from the plugin install dir, so
+# declaring manifest.hooks triggers a duplicate-load error. Required keys
+# are therefore name + version (hooks must NOT be in the manifest).
+t_title "plugin.json has required keys and does NOT declare hooks"
 export PJ="$PLUGIN_JSON"
 node -e '
   const fs=require("fs");
   const j=JSON.parse(fs.readFileSync(process.env.PJ,"utf8"));
-  const missing=["name","version","hooks"].filter(k=>!(k in j));
-  process.stdout.write(missing.length===0 ? "ok" : "missing:"+missing.join(","));
+  const missing=["name","version"].filter(k=>!(k in j));
+  const hasHooks = "hooks" in j;
+  if (missing.length) process.stdout.write("missing:"+missing.join(","));
+  else if (hasHooks) process.stdout.write("forbidden:hooks");
+  else process.stdout.write("ok");
 ' > /tmp/pj.txt
-t_assert_eq "ok" "$(cat /tmp/pj.txt)" "plugin.json has name, version, hooks"
+t_assert_eq "ok" "$(cat /tmp/pj.txt)" "plugin.json has name+version and omits hooks"
 
 # 2. hooks.json is valid JSON and lists all 4 lifecycle events
 t_title "hooks.json lists all 4 lifecycle events"

@@ -43,17 +43,22 @@ with three deliberate deviations:
 # Link the herdr plugin (creates panes + actions).
 herdr plugin link /home/rahat/development/herdr-puku-cli-plugin
 
+# Register the puku-cli marketplace (one-time). puku-cli only installs
+# plugins via a named marketplace, so we publish one in this repo
+# (.puku-plugin/marketplace.json) that points at puku-plugin/.
+puku-cli plugin marketplace add binsec01/herdr-puku-cli-plugin
+
 # Install the puku-cli plugin (registers the lifecycle hook).
-puku-cli plugin install /home/rahat/development/herdr-puku-cli-plugin/puku-plugin
+puku-cli plugin install herdr-integration@herdr-puku-cli-local
 
 # Seed the herdr agent-detection override.
-herdr plugin action invoke puku-cli.integration.setup
+herdr plugin action invoke setup --plugin puku-cli.integration
 ```
 
 Uninstall:
 
 ```bash
-puku-cli plugin uninstall herdr-integration
+puku-cli plugin uninstall herdr-integration@herdr-puku-cli-local
 herdr plugin unlink /home/rahat/development/herdr-puku-cli-plugin
 ```
 
@@ -68,7 +73,7 @@ herdr plugin pane open --plugin puku-cli.integration --entrypoint resume-named
 Send a notification:
 
 ```bash
-herdr plugin action invoke puku-cli.integration.notify "Build done" "api workspace"
+herdr plugin action invoke notify --plugin puku-cli.integration -- "Build done" "api workspace"
 ```
 
 Keybinding:
@@ -150,7 +155,8 @@ or `Stop` events report the next `working` or `idle` state.
 | File | Role |
 |---|---|
 | `herdr-plugin.toml` | Herdr manifest: 3 panes + setup + notify action |
-| `puku-plugin/.puku-plugin/plugin.json` | puku-cli plugin metadata |
+| `.puku-plugin/marketplace.json` | puku-cli marketplace manifest (declares `herdr-integration`) |
+| `puku-plugin/.puku-plugin/plugin.json` | puku-cli plugin metadata (no `hooks` key — puku-cli auto-loads `hooks/hooks.json`) |
 | `puku-plugin/hooks/hooks.json` | Hook matchers (SessionStart / PreToolUse / PostToolUse / Stop) → herdr-status.sh |
 | `puku-hooks/herdr-status.sh` | Lifecycle hook reporting to Herdr socket |
 | `scripts/launch.sh` | Pane entrypoint; runs `puku-cli` |
